@@ -1,6 +1,12 @@
 /// Return `true` if `n` is even, `false` otherwise.
 fn is_even(n: u32) -> bool {
-    todo!()
+    let mut is_even: bool;
+    if n % 2 == 0 {
+        is_even = true;
+    } else {
+        is_even = false;
+    }
+    is_even
 }
 
 #[cfg(test)]
