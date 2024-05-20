@@ -3,7 +3,22 @@ struct Ticket {
     description: String,
     status: String,
 }
-
+pub fn panic_if_empty(str: &str, key: &str) {
+    if str.is_empty() {
+        panic!("{} cannot be empty", key);
+    }
+}
+pub fn panic_if_chacharacter_count_exceeds(str: &str, count: usize, key: &str) {
+    if str.len() > count {
+        panic!("{} cannot be longer than {} characters", key, count);
+    }
+}
+pub fn panic_if_status_does_not_mattch(str: &str) {
+    match str {
+        "To-Do" | "In Progress" | "Done" => println!("accepted status"),
+        _ => panic!("Only `To-Do`, `In Progress`, and `Done` statuses are allowed"),
+    }
+}
 impl Ticket {
     // TODO: implement the `new` function.
     //  The following requirements should be met:
@@ -17,7 +32,14 @@ impl Ticket {
     // as well as some `String` methods. Use the documentation of Rust's standard library
     // to find the most appropriate options -> https://doc.rust-lang.org/std/string/struct.String.html
     fn new(title: String, description: String, status: String) -> Self {
-        todo!();
+        panic_if_chacharacter_count_exceeds(&title, 50, "Title");
+        panic_if_chacharacter_count_exceeds(&description, 500, "Description");
+        panic_if_empty(&title, "Title");
+        panic_if_empty(&description, "Description");
+        if (description.len() > 500) {
+            panic!("Description cannot be longer than 500 characters");
+        }
+        panic_if_status_does_not_mattch(&status);
         Self {
             title,
             description,
